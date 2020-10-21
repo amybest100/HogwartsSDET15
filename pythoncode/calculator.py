@@ -10,4 +10,7 @@ class Calculator:
         return a * b
 
     def div(self, a, b):
-        return a / b
+        try:
+            return a / b
+        except ZeroDivisionError:
+            return "You can't divide by zero!"

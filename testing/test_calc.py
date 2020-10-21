@@ -23,12 +23,26 @@ class TestCalc:
         result = self.calc.add(a, b)
         assert result == expect
 
-    def test_add1(self):
+    @pytest.mark.parametrize('c,d,expect1', [
+        [20, 3, 17], [50, 20, 30], [0.9, 0.1, 0.8]
+    ])
+    def test_sub(self, c, d, expect1):
         # calc=Calculator()
-        result = self.calc.add(100, 100)
-        assert result == 200
+        result = self.calc.sub(c, d)
+        assert result == expect1
 
-    def test_add2(self):
+    @pytest.mark.parametrize('e,f,expect2', [
+        [2, 3, 6], [4, 6, 24], [5, 7, 35], [8, 0, 0]
+    ])
+    def test_mul(self, e, f, expect2):
         # calc=Calculator()
-        result = self.calc.add(0.1, 0.1)
-        assert result == 0.2
+        result = self.calc.mul(e, f)
+        assert result == expect2
+
+    @pytest.mark.parametrize('g,h,expect3', [
+        [9, 1, 9], [77, 11, 7], [8, 0, 2]
+    ])
+    def test_div(self, g, h, expect3):
+        # calc=Calculator()
+        result = self.calc.div(g, h)
+        assert result == expect3
