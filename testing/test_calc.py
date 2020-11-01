@@ -1,4 +1,5 @@
 import pytest
+import yaml
 
 from pythoncode.calculator import Calculator
 
@@ -8,6 +9,14 @@ def test_a():
     print("test case a")
 
 
+def get_datas():
+    with open("./datas/calc.yml") as f:
+        datas = yaml.safe_load(f)
+    add_datas = datas['add']['datas']
+    add_ids = datas['add']['ids']
+    print(add_datas)
+    print(add_ids)
+    return [add_datas, add_ids]
 class TestCalc:
     def setup_class(self):
         print("计算器开始工作")
@@ -22,16 +31,23 @@ class TestCalc:
     def teardown(self):
         print("计算结束")
 
-    # 加法，整数、小数、负数
-    @pytest.mark.parametrize('a,b,expect', [
-        [1, 1, 2], [0.3, 0.2, 0.5], [-3, -6, -9]
-    ])
+    # 加法，整数、负数
+    @pytest.mark.parametrize('a,b,expect', get_datas()[0], ids=get_datas()[1])
     def test_add(self, a, b, expect):
         # calc=Calculator()
         result = self.calc.add(a, b)
         assert result == expect
 
-    #减法，整数、小数、负数
+    # 浮点加法
+    @pytest.mark.parametrize('a,b,expect', [
+        [0.1, 0.2, 0.3]
+    ])
+    def test_float_add(self, a, b, expect):
+        # calc=Calculator()
+        result = self.calc.add(a, b)
+        assert round(result, 2) == expect
+
+    # 减法，整数、小数、负数
     @pytest.mark.parametrize('c,d,expect1', [
         [20, 3, 17], [1.8, 0.5, 1.3], [-7, 1, -8]
     ])

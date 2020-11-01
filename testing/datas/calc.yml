@@ -1,0 +1,7 @@
+add:
+  datas:
+    - [ 1, 1, 2 ]
+    - [ -3, -6, -9 ]
+  ids:
+    - "int_add"
+    - "minus_add"
