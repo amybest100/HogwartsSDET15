@@ -8,7 +8,7 @@ import pytest
 @pytest.fixture(scope="module", autouse=True)
 def record_vedio():
     # 使用scrcpy录屏
-    command = "C:\scrcpy-win64-v1.16\scrcpy --record logi.mp4"
+    command = "scrcpy --record logi.mp4"
     # 使用cmd命令
     p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     print(p)
